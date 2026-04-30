@@ -4,8 +4,9 @@ import './Focus.scss';
 import FocusPoint from '../FocusPoint/focuspoint';
 import EditFocusModal from '../modal/edit-modal';
 import axios from 'axios';
+const apiUrl = process.env.BACKEND_URL || 'http://localhost:5000';
 
-const API = 'http://localhost:5000/focus';
+const API =`${apiUrl}/focus`;
 
 const Focus = () => {
   const [isOpenModal, setOpenModal] = useState(false);

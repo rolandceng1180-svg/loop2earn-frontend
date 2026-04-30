@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Login.scss'; // Import the Sass file
 import { useState } from 'react';
 
+const apiUrl = process.env.BACKEND_URL || 'http://localhost:5000';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +17,7 @@ const Login = () => {
     try {
       // Accessing protected resource using access token
       const accesstoken = localStorage.getItem('accesstoken');
-      const response = await fetch('http://localhost:5000/dashboard', {
+      const response = await fetch(`${apiUrl}/dashboard`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${accesstoken}`
@@ -31,7 +32,7 @@ const Login = () => {
         console.error('verify failed:', errorData);
         const refreshtoken = localStorage.getItem('refreshtoken');
         if (refreshtoken) {
-          await fetch('http://localhost:5000/refresh-access', {
+          await fetch(`${apiUrl}/refresh-access`, {
             method: 'POST',
             body: JSON.stringify({ refreshtoken: refreshtoken }),
             headers: {
@@ -53,7 +54,7 @@ const Login = () => {
     // Add logic here to handle signup (e.g., API request, user creation)
     try {
       console.log('here');
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -8,6 +8,9 @@ import Ico2 from '../../image/metamask-icon logo.png';
 import Ico3 from '../../image/twitter logo.png';
 import Ico4 from '../../image/Group.png';
 import './Signup.scss'; // Import the Sass file
+
+const apiUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -18,7 +21,7 @@ const Signup = () => {
     // Add logic here to handle signup (e.g., API request, user creation)
     try {
       console.log('here');
-      const response = await fetch('http://localhost:5000/signup', {
+      const response = await fetch(`${apiUrl}/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
